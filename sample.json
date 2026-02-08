@@ -1,0 +1,11 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "Blog Post",
+      "content": "Content",
+      "category": "Technology",
+      "tags": ["Tech", "Programming"]
+    }
+  ]
+}
