@@ -12,6 +12,10 @@ const allPosts = [
     id: "1",
     content: "Hello World",
   },
+  {
+    id: "2",
+    content: "What's up?",
+  },
 ];
 
 function createFile() {
