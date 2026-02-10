@@ -7,13 +7,20 @@ const __dirname = dirname(__filename);
 
 const filePath = join(__dirname, "..", "data", "data.json");
 
+const allPosts = [
+  {
+    id: "1",
+    content: "Hello World",
+  },
+];
+
 function createFile() {
   if (fs.existsSync(filePath)) {
     console.log("File exists!");
-    console.log(__dirname);
+    console.log(filePath);
   } else {
     console.log("File does not exist!");
-    fs.writeFileSync(filePath, "Hello World!");
+    fs.writeFileSync(filePath, JSON.stringify(allPosts));
   }
 }
 
