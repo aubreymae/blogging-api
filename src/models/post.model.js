@@ -1,5 +1,5 @@
 class Post {
-  constructor(id, title, content, category, tags) {
+  constructor(title, content, category, tags) {
     this.id = crypto.randomUUID();
     this.title = title;
     this.content = content;
@@ -9,4 +9,15 @@ class Post {
   }
 }
 
-module.exports = Post;
+function createPost(singlePost) {
+  const newPost = new Post(
+    singlePost.title,
+    singlePost.content,
+    singlePost.category,
+    singlePost.tags,
+  );
+
+  return newPost;
+}
+
+export { createPost };
