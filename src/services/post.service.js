@@ -1,10 +1,10 @@
 import { createPost } from "./post.model.js";
 import { getData, writeFile } from "../db/file.js";
 
-function addPost(newItem) {
-  let db = getData();
+async function addPost(newItem) {
+  let db = await getData();
   db.push(createPost(newItem));
-  writeFile(db);
+  await writeFile(db);
   console.log(db);
 }
 
