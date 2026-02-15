@@ -14,9 +14,9 @@ let dbArray = [];
  */
 async function getData() {
   try {
-    const isEmpty = await fs.readFile(filepath, "utf-8");
+    const fileContents = await fs.readFile(filepath, "utf-8");
 
-    if (isEmpty) {
+    if (!fileContents) {
       return [];
     } else {
       const allPosts = JSON.parse(fileContents);
@@ -24,13 +24,23 @@ async function getData() {
       return allPosts;
     }
   } catch (error) {
-    writeFile(dbArray);
-    return dbArray;
+    await writeFile([], null);
+    return [];
   }
 }
 
-async function writeFile(item) {
-  await fs.writeFile(filepath, JSON.stringify(item));
+/*
+ * Write into file
+ */
+async function writeFile(db, item) {
+  if (db.length === 0 && item !== null) {
+    console.log("Empty file; writing data...");
+    await fs.writeFile(filepath, JSON.stringify([item]));
+  } else if (item !== null) {
+    console.log("Pushing into current DB...");
+    db.push(item);
+    await fs.writeFile(filepath, JSON.stringify(db));
+  }
 }
 
 export { getData, writeFile };

@@ -4,8 +4,8 @@ import { getData, writeFile } from "../db/file.js";
 async function addPost(newItem) {
   let db = await getData();
   const newPost = createPost(newItem);
-  db.push(newPost);
-  await writeFile(db);
+  await writeFile(db, newPost);
+
   return newPost;
 }
 
