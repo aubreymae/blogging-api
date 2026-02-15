@@ -1,9 +1,9 @@
-import { addPost } from "../services/post.service.js";
+import { addPost, getPost } from "../services/post.service.js";
 
 async function createPostHandler(req, res) {
   try {
     const post = await addPost(req.body);
-    res.status(201).json(post);
+    return res.status(201).json(post);
   } catch (error) {
     res.status(500).json({
       error: error.message,
@@ -11,4 +11,15 @@ async function createPostHandler(req, res) {
   }
 }
 
-export { createPostHandler };
+async function getPostHandler(req, res) {
+  try {
+    const posts = await getPost();
+    return res.status(200).json(posts);
+  } catch (error) {
+    res.status(500).json({
+      error: error.message,
+    });
+  }
+}
+
+export { createPostHandler, getPostHandler };

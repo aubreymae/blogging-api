@@ -1,4 +1,4 @@
-import { promise as fs } from "fs";
+import fs from "fs/promises";
 import { fileURLToPath } from "url";
 import { dirname, join } from "path";
 
@@ -14,15 +14,18 @@ let dbArray = [];
  */
 async function getData() {
   try {
-    if (fileExists(filepath)) {
-      const fileContents = await fs.readFile(filepath, "utf-8");
-      const allPosts = JSON.parse(fileContents);
-      return allPosts;
+    const isEmpty = await fs.readFile(filepath, "utf-8");
+
+    if (isEmpty) {
+      return [];
     } else {
-      throw new Error("File does not exist!");
+      const allPosts = JSON.parse(fileContents);
+      console.log(allPosts);
+      return allPosts;
     }
   } catch (error) {
-    console.error(error);
+    writeFile(dbArray);
+    return dbArray;
   }
 }
 
@@ -30,12 +33,12 @@ async function getData() {
  * Checks if a file already exists; otherwise creates one
  */
 async function fileExists(currentPath) {
-  if (fs.existsSync(currentPath)) {
+  await fs.stat(currentPath, (err, stats) => {
+    if (err) {
+      return false;
+    }
     return true;
-  } else {
-    await fs.writeFile(currentPath, JSON.stringify(dbArray));
-    return false;
-  }
+  });
 }
 
 async function writeFile(item) {

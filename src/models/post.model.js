@@ -1,3 +1,5 @@
+import crypto from "crypto";
+
 class Post {
   constructor(title, content, category, tags) {
     this.id = crypto.randomUUID();

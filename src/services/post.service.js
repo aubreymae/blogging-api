@@ -1,11 +1,18 @@
-import { createPost } from "./post.model.js";
+import { createPost } from "../models/post.model.js";
 import { getData, writeFile } from "../db/file.js";
 
 async function addPost(newItem) {
   let db = await getData();
-  db.push(createPost(newItem));
+  const newPost = createPost(newItem);
+  db.push(newPost);
   await writeFile(db);
   console.log(db);
+  return newPost;
 }
 
-export { addPost };
+async function getPost() {
+  let db = await getData();
+  return db;
+}
+
+export { addPost, getPost };
