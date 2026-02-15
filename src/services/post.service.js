@@ -6,7 +6,6 @@ async function addPost(newItem) {
   const newPost = createPost(newItem);
   db.push(newPost);
   await writeFile(db);
-  console.log(db);
   return newPost;
 }
 

@@ -29,18 +29,6 @@ async function getData() {
   }
 }
 
-/*
- * Checks if a file already exists; otherwise creates one
- */
-async function fileExists(currentPath) {
-  await fs.stat(currentPath, (err, stats) => {
-    if (err) {
-      return false;
-    }
-    return true;
-  });
-}
-
 async function writeFile(item) {
   await fs.writeFile(filepath, JSON.stringify(item));
 }
