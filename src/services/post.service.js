@@ -1,5 +1,5 @@
 import { createPost } from "../models/post.model.js";
-import { getData, writeFile } from "../db/file.js";
+import { getData, writeFile, searchDB } from "../db/file.js";
 
 async function addPost(newItem) {
   let db = await getData();
@@ -14,4 +14,10 @@ async function getPost() {
   return db;
 }
 
-export { addPost, getPost };
+async function getPostById(id) {
+  let db = await getData();
+  const result = await searchDB(db, id);
+  return result;
+}
+
+export { addPost, getPost, getPostById };

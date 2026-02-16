@@ -1,4 +1,4 @@
-import { addPost, getPost } from "../services/post.service.js";
+import { addPost, getPost, getPostById } from "../services/post.service.js";
 
 async function createPostHandler(req, res) {
   try {
@@ -22,4 +22,15 @@ async function getPostHandler(req, res) {
   }
 }
 
-export { createPostHandler, getPostHandler };
+async function getPostByIdHandler(req, res) {
+  try {
+    const post = await getPostById(req.params.id);
+    return res.status(200).json(post);
+  } catch (error) {
+    res.status(500).json({
+      error: error.message,
+    });
+  }
+}
+
+export { createPostHandler, getPostHandler, getPostByIdHandler };

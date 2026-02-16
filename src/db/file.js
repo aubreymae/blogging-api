@@ -20,7 +20,6 @@ async function getData() {
       return [];
     } else {
       const allPosts = JSON.parse(fileContents);
-      console.log(allPosts);
       return allPosts;
     }
   } catch (error) {
@@ -43,4 +42,12 @@ async function writeFile(db, item) {
   }
 }
 
-export { getData, writeFile };
+/*
+ * Write into file
+ */
+async function searchDB(db, postId) {
+  const result = db.find((post) => post.id === `${postId}`);
+  return result;
+}
+
+export { getData, writeFile, searchDB };

@@ -1,5 +1,8 @@
-import { createPostHandler } from "../controllers/post.controller.js";
-import { addPost } from "../services/post.service.js";
+import {
+  createPostHandler,
+  getPostHandler,
+  getPostByIdHandler,
+} from "../controllers/post.controller.js";
 
 const example = {
   title: "My First Blog Post",
@@ -10,6 +13,9 @@ const example = {
 
 const req = {
   body: example,
+  params: {
+    id: "09625d5d-6c28-4e49-9d34-4ca632f26ded",
+  },
 };
 
 const res = {
@@ -23,4 +29,6 @@ const res = {
   },
 };
 
-createPostHandler(req, res);
+// createPostHandler(req, res);
+// getPostHandler(req, res);
+getPostByIdHandler(req, res);
