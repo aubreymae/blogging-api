@@ -50,4 +50,15 @@ async function searchDB(db, postId) {
   return result;
 }
 
-export { getData, writeFile, searchDB };
+/*
+ *
+ */
+async function replaceItem(db, postId, newPost) {
+  const index = db.findIndex((post) => post.id === `${postId}`);
+
+  db[index] = newPost;
+  await fs.writeFile(filepath, JSON.stringify([db]));
+  return newPost;
+}
+
+export { getData, writeFile, searchDB, replaceItem };

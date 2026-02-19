@@ -1,4 +1,9 @@
-import { addPost, getPost, getPostById } from "../services/post.service.js";
+import {
+  addPost,
+  getPost,
+  getPostById,
+  updatePost,
+} from "../services/post.service.js";
 
 async function createPostHandler(req, res) {
   try {
@@ -33,4 +38,26 @@ async function getPostByIdHandler(req, res) {
   }
 }
 
-export { createPostHandler, getPostHandler, getPostByIdHandler };
+async function putPostHandler(req, res) {
+  try {
+    const updatedPost = await updatePost(
+      req.params.id,
+      req.params.title,
+      req.params.content,
+      req.params.category,
+      req.params.tags,
+    );
+    return res.status(200).json(updatedPost);
+  } catch (error) {
+    res.status(500).json({
+      error: error.message,
+    });
+  }
+}
+
+export {
+  createPostHandler,
+  getPostHandler,
+  getPostByIdHandler,
+  putPostHandler,
+};
