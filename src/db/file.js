@@ -43,7 +43,7 @@ async function writeFile(db, item) {
 }
 
 /*
- * Write into file
+ * Search for post by ID then return it
  */
 async function searchDB(db, postId) {
   const result = db.find((post) => post.id === `${postId}`);
@@ -51,14 +51,29 @@ async function searchDB(db, postId) {
 }
 
 /*
- *
+ * Replace item in DB by given ID with a new item
  */
 async function replaceItem(db, postId, newPost) {
-  const index = db.findIndex((post) => post.id === `${postId}`);
+  const index = db.findIndex((post) => post.id === postId);
 
   db[index] = newPost;
-  await fs.writeFile(filepath, JSON.stringify([db]));
+  await fs.writeFile(filepath, JSON.stringify(db));
   return newPost;
 }
 
-export { getData, writeFile, searchDB, replaceItem };
+/*
+ * Generate ID for post
+ */
+async function generateID(db) {
+  try {
+    if (db.length === 0) {
+      return 1;
+    } else {
+      return db[db.length - 1].id + 1;
+    }
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export { getData, writeFile, searchDB, replaceItem, generateID };

@@ -1,8 +1,8 @@
 import crypto from "crypto";
 
 class Post {
-  constructor(title, content, category, tags) {
-    this.id = crypto.randomUUID();
+  constructor(id, title, content, category, tags) {
+    this.id = id;
     this.title = title;
     this.content = content;
     this.category = category;
@@ -11,13 +11,8 @@ class Post {
   }
 }
 
-function createPost(singlePost) {
-  const newPost = new Post(
-    singlePost.title,
-    singlePost.content,
-    singlePost.category,
-    singlePost.tags,
-  );
+function createPost(id, title, content, category, tags) {
+  const newPost = new Post(id, title, content, category, tags);
 
   return newPost;
 }

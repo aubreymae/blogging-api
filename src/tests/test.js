@@ -13,13 +13,21 @@ const example = {
 };
 
 const req = {
-  body: example,
   params: {
-    id: "09625d5d-6c28-4e49-9d34-4ca632f26ded",
+    title: "My First Blog Post",
+    content: "This is the content of my first blog post.",
+    category: "Technology",
+    tags: ["Tech", "Programming"],
+  },
+};
+
+const req2 = {
+  params: {
+    id: 1,
     title: "My First Blog Post (Updated)",
     content: "This is the content of my first blog post. (Updated)",
-    category: "(Updated)",
-    tags: ["Tech", "Programming", "Recent"],
+    category: "Technology",
+    tags: ["Tech", "Programming", "Updated"],
   },
 };
 
@@ -37,4 +45,4 @@ const res = {
 // createPostHandler(req, res);
 // getPostHandler(req, res);
 // getPostByIdHandler(req, res);
-putPostHandler(req, res);
+putPostHandler(req2, res);

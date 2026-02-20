@@ -1,9 +1,16 @@
 import { createPost } from "../models/post.model.js";
-import { getData, writeFile, searchDB, replaceItem } from "../db/file.js";
+import {
+  getData,
+  writeFile,
+  searchDB,
+  replaceItem,
+  generateID,
+} from "../db/file.js";
 
-async function addPost(newItem) {
+async function addPost(title, content, category, tags) {
   let db = await getData();
-  const newPost = createPost(newItem);
+  const currId = await generateID(db);
+  const newPost = createPost(currId, title, content, category, tags);
   await writeFile(db, newPost);
 
   return newPost;
@@ -22,13 +29,7 @@ async function getPostById(id) {
 
 async function updatePost(id, title, content, category, tags) {
   let db = await getData();
-  const newPost = createPost({
-    id: id,
-    title: title,
-    content: content,
-    category: category,
-    tags: tags,
-  });
+  const newPost = createPost(id, title, content, category, tags);
 
   return replaceItem(db, id, newPost);
 }

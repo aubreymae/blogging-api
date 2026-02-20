@@ -7,7 +7,12 @@ import {
 
 async function createPostHandler(req, res) {
   try {
-    const post = await addPost(req.body);
+    const post = await addPost(
+      req.params.title,
+      req.params.content,
+      req.params.category,
+      req.params.tags,
+    );
     return res.status(201).json(post);
   } catch (error) {
     res.status(500).json({
