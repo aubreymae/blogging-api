@@ -46,7 +46,7 @@ async function writeFile(db, item) {
  * Search for post by ID then return it
  */
 async function searchDB(db, postId) {
-  const result = db.find((post) => post.id === `${postId}`);
+  const result = db.find((post) => post.id === postId);
   return result;
 }
 

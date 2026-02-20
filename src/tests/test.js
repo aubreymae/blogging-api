@@ -14,6 +14,9 @@ const example = {
 
 const req = {
   params: {
+    id: 1,
+  },
+  body: {
     title: "My First Blog Post",
     content: "This is the content of my first blog post.",
     category: "Technology",
@@ -21,15 +24,17 @@ const req = {
   },
 };
 
-const req2 = {
-  params: {
-    id: 1,
-    title: "My First Blog Post (Updated)",
-    content: "This is the content of my first blog post. (Updated)",
-    category: "Technology",
-    tags: ["Tech", "Programming", "Updated"],
-  },
-};
+// const req2 = {
+//   params: {
+//     id: 1,
+//   },
+//   body: {
+//     title: "My First Blog Post (Updated)",
+//     content: "This is the content of my first blog post. (Updated)",
+//     category: "Technology",
+//     tags: ["Tech", "Programming", "Updated"],
+//   },
+// };
 
 const res = {
   status: function (code) {
@@ -45,4 +50,4 @@ const res = {
 // createPostHandler(req, res);
 // getPostHandler(req, res);
 // getPostByIdHandler(req, res);
-putPostHandler(req2, res);
+putPostHandler(req, res);
