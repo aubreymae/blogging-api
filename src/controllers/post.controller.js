@@ -3,6 +3,7 @@ import {
   getPost,
   getPostById,
   updatePost,
+  deletePost,
 } from "../services/post.service.js";
 
 async function createPostHandler(req, res) {
@@ -62,9 +63,22 @@ async function putPostHandler(req, res) {
   }
 }
 
+async function deletePostHandler(req, res) {
+  try {
+    const id = parseInt(req.params.id);
+    const result = await deletePost(id);
+    return res.status(200).json(result);
+  } catch (error) {
+    res.status(500).json({
+      error: error.message,
+    });
+  }
+}
+
 export {
   createPostHandler,
   getPostHandler,
   getPostByIdHandler,
   putPostHandler,
+  deletePostHandler,
 };

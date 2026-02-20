@@ -5,6 +5,7 @@ import {
   searchDB,
   replaceItem,
   generateID,
+  deleteItem,
 } from "../db/file.js";
 
 async function addPost(title, content, category, tags) {
@@ -31,7 +32,12 @@ async function updatePost(id, title, content, category, tags) {
   let db = await getData();
   const newPost = createPost(id, title, content, category, tags);
 
-  return replaceItem(db, id, newPost);
+  return await replaceItem(db, id, newPost);
 }
 
-export { addPost, getPost, getPostById, updatePost };
+async function deletePost(id) {
+  let db = await getData();
+  return await deleteItem(db, id);
+}
+
+export { addPost, getPost, getPostById, updatePost, deletePost };

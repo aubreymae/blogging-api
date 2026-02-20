@@ -3,6 +3,7 @@ import {
   getPostHandler,
   getPostByIdHandler,
   putPostHandler,
+  deletePostHandler,
 } from "../controllers/post.controller.js";
 
 const example = {
@@ -47,7 +48,8 @@ const res = {
   },
 };
 
-// createPostHandler(req, res);
+createPostHandler(req, res);
 // getPostHandler(req, res);
 // getPostByIdHandler(req, res);
-putPostHandler(req, res);
+// putPostHandler(req, res);
+// deletePostHandler(req, res);

@@ -76,4 +76,25 @@ async function generateID(db) {
   }
 }
 
-export { getData, writeFile, searchDB, replaceItem, generateID };
+async function deleteItem(db, id) {
+  try {
+    if (db.length === 0 || id > db.length) {
+      throw new Error("Database is empty.");
+    } else {
+      const deletedItem = db.splice(
+        db.findIndex((post) => post.id === id),
+        1,
+      );
+
+      if (deletedItem !== -1) {
+        await fs.writeFile(filepath, JSON.stringify(db));
+      }
+
+      return deletedItem;
+    }
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export { getData, writeFile, searchDB, replaceItem, generateID, deleteItem };
