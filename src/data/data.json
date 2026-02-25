@@ -1,1 +1,18 @@
-[]
+[
+  {
+    "id": 1,
+    "title": "Day in the Life",
+    "content": "Welcome to the inner workings of a Software Engineer.",
+    "category": "Technology",
+    "tags": ["Tech", "Journalling"],
+    "createdAt": "2026-02-20T23:19:17.125Z"
+  },
+  {
+    "id": 2,
+    "title": "Coding an API Service",
+    "content": "REST API best practices involve understanding how HTTP requests are created and sent.",
+    "category": "Technology",
+    "tags": ["Tech", "Programming", "Web"],
+    "createdAt": "2026-02-20T23:20:05.801Z"
+  }
+]

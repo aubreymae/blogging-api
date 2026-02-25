@@ -6,6 +6,7 @@ import {
   replaceItem,
   generateID,
   deleteItem,
+  getPostsByTerm,
 } from "../db/file.js";
 
 async function addPost(title, content, category, tags) {
@@ -40,4 +41,17 @@ async function deletePost(id) {
   return await deleteItem(db, id);
 }
 
-export { addPost, getPost, getPostById, updatePost, deletePost };
+async function getPostsContainingTerm(term) {
+  let db = await getData();
+
+  return await getPostsByTerm(db, term);
+}
+
+export {
+  addPost,
+  getPost,
+  getPostById,
+  updatePost,
+  deletePost,
+  getPostsContainingTerm,
+};

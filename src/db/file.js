@@ -97,4 +97,34 @@ async function deleteItem(db, id) {
   }
 }
 
-export { getData, writeFile, searchDB, replaceItem, generateID, deleteItem };
+/*
+ * Returns all posts by search term
+ */
+async function getPostsByTerm(db, term) {
+  let allPosts = [];
+
+  for (let i = 0; i < db.length; i++) {
+    for (const [key, value] of Object.entries(db[i])) {
+      // console.log(value.toString().toLowerCase());
+      if (typeof value === "string") {
+        if (value.toLowerCase().includes(term.toLowerCase())) {
+          // console.log(value);
+          allPosts.push(db[i]);
+          break;
+        }
+      }
+    }
+  }
+
+  return allPosts;
+}
+
+export {
+  getData,
+  writeFile,
+  searchDB,
+  replaceItem,
+  generateID,
+  deleteItem,
+  getPostsByTerm,
+};

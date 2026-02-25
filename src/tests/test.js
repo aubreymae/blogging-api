@@ -37,6 +37,12 @@ const req = {
 //   },
 // };
 
+const req3 = {
+  query: {
+    term: "SERVICE",
+  },
+};
+
 const res = {
   status: function (code) {
     this.statusCode = code;
@@ -48,8 +54,9 @@ const res = {
   },
 };
 
-createPostHandler(req, res);
+// createPostHandler(req, res);
 // getPostHandler(req, res);
 // getPostByIdHandler(req, res);
 // putPostHandler(req, res);
 // deletePostHandler(req, res);
+getPostHandler(req3, res);

@@ -4,6 +4,7 @@ import {
   getPostById,
   updatePost,
   deletePost,
+  getPostsContainingTerm,
 } from "../services/post.service.js";
 
 async function createPostHandler(req, res) {
@@ -23,13 +24,25 @@ async function createPostHandler(req, res) {
 }
 
 async function getPostHandler(req, res) {
-  try {
-    const posts = await getPost();
-    return res.status(200).json(posts);
-  } catch (error) {
-    res.status(500).json({
-      error: error.message,
-    });
+  if (req.query.term) {
+    try {
+      // find and return posts containing the term
+      const posts = await getPostsContainingTerm(req.query.term);
+      return res.status(200).json(posts);
+    } catch (error) {
+      res.status(500).json({
+        error: error.message,
+      });
+    }
+  } else {
+    try {
+      const posts = await getPost();
+      return res.status(200).json(posts);
+    } catch (error) {
+      res.status(500).json({
+        error: error.message,
+      });
+    }
   }
 }
 
