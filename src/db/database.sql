@@ -11,7 +11,7 @@ CREATE TABLE tags (
 );
 
 CREATE TABLE posts (
-    id INTEGER PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     title TEXT NOT NULL,
     content TEXT NOT NULL,
     category_id INTEGER NOT NULL REFERENCES categories(id),

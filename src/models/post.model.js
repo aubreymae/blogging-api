@@ -1,8 +1,7 @@
 import crypto from "crypto";
 
 class Post {
-  constructor(id, title, content, category, tags) {
-    this.id = id;
+  constructor(title, content, category, tags) {
     this.title = title;
     this.content = content;
     this.category = category;

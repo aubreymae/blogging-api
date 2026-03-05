@@ -8,14 +8,17 @@ import {
   deleteItem,
   getPostsByTerm,
 } from "../db/file.js";
+import { insertPost } from "../db/index.js";
 
 async function addPost(title, content, category, tags) {
-  let db = await getData();
-  const currId = await generateID(db);
-  const newPost = createPost(currId, title, content, category, tags);
-  await writeFile(db, newPost);
+  // let db = await getData();
+  // const currId = await generateID(db);
+  // const newPost = createPost(currId, title, content, category, tags);
+  // await writeFile(db, newPost);
+  const newPost = createPost(title, content, category, tags);
+  const result = await insertPost(newPost);
 
-  return newPost;
+  return result;
 }
 
 async function getPost() {
