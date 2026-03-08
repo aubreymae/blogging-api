@@ -1,4 +1,4 @@
-import { addPostService } from "../services/post.service.js";
+import { addPostService, removePostService } from "../services/post.service.js";
 
 async function createPostHandler(req, res) {
   try {
@@ -72,7 +72,7 @@ async function putPostHandler(req, res) {
 async function deletePostHandler(req, res) {
   try {
     const id = parseInt(req.params.id);
-    const result = await deletePost(id);
+    const result = await removePostService(id);
     return res.status(200).json(result);
   } catch (error) {
     res.status(500).json({
@@ -81,4 +81,4 @@ async function deletePostHandler(req, res) {
   }
 }
 
-export { createPostHandler };
+export { createPostHandler, deletePostHandler };

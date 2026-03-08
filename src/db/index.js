@@ -30,7 +30,7 @@ async function insertPost(post, categoryID) {
     [post.title, post.content, categoryID, post.created_at],
   );
 
-  return result.rows[0].post._id;
+  return result.rows[0].post_id;
 }
 
 /*
@@ -55,4 +55,13 @@ async function insertPostTag(postID, tagID) {
   ]);
 }
 
-export { checkCategory, insertPost, checkTags, insertPostTag };
+/*
+ * Delete post by id.
+ */
+async function deletePostByID(id) {
+  const result = await pool.query("DELETE FROM posts WHERE post_id=$1", [id]);
+
+  return result.rows[0];
+}
+
+export { checkCategory, insertPost, checkTags, insertPostTag, deletePostByID };

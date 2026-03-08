@@ -4,6 +4,7 @@ import {
   insertPost,
   checkTags,
   insertPostTag,
+  deletePostByID,
 } from "../db/index.js";
 
 async function addPostService(title, content, category, tags) {
@@ -17,6 +18,12 @@ async function addPostService(title, content, category, tags) {
   }
 
   return postID;
+}
+
+async function removePostService(id) {
+  const result = await deletePostByID(id);
+
+  return result;
 }
 
 /*-- Writes into local file --*/
@@ -59,4 +66,4 @@ async function getPostsContainingTerm(term) {
   return await getPostsByTerm(db, term);
 }
 
-export { addPostService };
+export { addPostService, removePostService };
