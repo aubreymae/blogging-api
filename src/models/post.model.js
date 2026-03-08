@@ -10,8 +10,8 @@ class Post {
   }
 }
 
-function createPost(id, title, content, category, tags) {
-  const newPost = new Post(id, title, content, category, tags);
+function createPost(title, content, category, tags) {
+  const newPost = new Post(title, content, category, tags);
 
   return newPost;
 }

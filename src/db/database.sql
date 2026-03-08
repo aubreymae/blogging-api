@@ -1,25 +1,28 @@
 CREATE DATABASE blogdb;
 
 CREATE TABLE categories (
-    id SERIAL PRIMARY KEY,
-    name TEXT NOT NULL UNIQUE
+    category_id SERIAL PRIMARY KEY,
+    category_name TEXT NOT NULL UNIQUE
 );
 
 CREATE TABLE tags (
-    id SERIAL PRIMARY KEY,
-    name TEXT NOT NULL UNIQUE
+    tag_id SERIAL PRIMARY KEY,
+    tag_name TEXT NOT NULL UNIQUE
 );
 
 CREATE TABLE posts (
-    id SERIAL PRIMARY KEY,
+    post_id SERIAL PRIMARY KEY,
     title TEXT NOT NULL,
     content TEXT NOT NULL,
-    category_id INTEGER NOT NULL REFERENCES categories(id),
-    created_at TIMESTAMPTZ NOT NULL
+    category_id INT,
+    created_at TIMESTAMP,
+    FOREIGN KEY (category_id) REFERENCES categories(category_id)
 );
 
 CREATE TABLE post_tags (
-    post_id INTEGER REFERENCES posts(id) ON DELETE CASCADE,
-    tag_id INTEGER REFERENCES tags(id) ON DELETE CASCADE,
-    PRIMARY KEY (post_id, tag_id)
+    post_id INT, 
+    tag_id INT,
+    PRIMARY KEY (post_id, tag_id),
+    FOREIGN KEY (post_id) REFERENCES posts(post_id) ON DELETE CASCADE,
+    FOREIGN KEY (tag_id) REFERENCES tags(tag_id) ON DELETE CASCADE
 );

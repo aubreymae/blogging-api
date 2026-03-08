@@ -1,15 +1,8 @@
-import {
-  addPost,
-  getPost,
-  getPostById,
-  updatePost,
-  deletePost,
-  getPostsContainingTerm,
-} from "../services/post.service.js";
+import { addPostService } from "../services/post.service.js";
 
 async function createPostHandler(req, res) {
   try {
-    const post = await addPost(
+    const post = await addPostService(
       req.body.title,
       req.body.content,
       req.body.category,
@@ -88,10 +81,4 @@ async function deletePostHandler(req, res) {
   }
 }
 
-export {
-  createPostHandler,
-  getPostHandler,
-  getPostByIdHandler,
-  putPostHandler,
-  deletePostHandler,
-};
+export { createPostHandler };

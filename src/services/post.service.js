@@ -1,22 +1,31 @@
 import { createPost } from "../models/post.model.js";
 import {
-  getData,
-  writeFile,
-  searchDB,
-  replaceItem,
-  generateID,
-  deleteItem,
-  getPostsByTerm,
-} from "../db/file.js";
-import { insertPost } from "../db/index.js";
+  checkCategory,
+  insertPost,
+  checkTags,
+  insertPostTag,
+} from "../db/index.js";
+
+async function addPostService(title, content, category, tags) {
+  const newPost = createPost(title, content, category, tags);
+  const categoryID = await checkCategory(category);
+  const postID = await insertPost(newPost, categoryID);
+
+  for (const tag of tags) {
+    const tagID = await checkTags(tag);
+    await insertPostTag(postID, tagID);
+  }
+
+  return postID;
+}
+
+/*-- Writes into local file --*/
 
 async function addPost(title, content, category, tags) {
-  // let db = await getData();
-  // const currId = await generateID(db);
-  // const newPost = createPost(currId, title, content, category, tags);
-  // await writeFile(db, newPost);
-  const newPost = createPost(title, content, category, tags);
-  const result = await insertPost(newPost);
+  let db = await getData();
+  const currId = await generateID(db);
+  const newPost = createPost(currId, title, content, category, tags);
+  await writeFile(db, newPost);
 
   return result;
 }
@@ -50,11 +59,4 @@ async function getPostsContainingTerm(term) {
   return await getPostsByTerm(db, term);
 }
 
-export {
-  addPost,
-  getPost,
-  getPostById,
-  updatePost,
-  deletePost,
-  getPostsContainingTerm,
-};
+export { addPostService };
