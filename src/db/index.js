@@ -56,12 +56,45 @@ async function insertPostTag(postID, tagID) {
 }
 
 /*
+ * Delete rows from post_tags.
+ */
+async function deletePostTag(postID) {
+  await pool.query("DELETE FROM post_tags WHERE post_id=$1", [postID]);
+}
+
+/*
  * Delete post by id.
  */
 async function deletePostByID(id) {
   const result = await pool.query("DELETE FROM posts WHERE post_id=$1", [id]);
 
-  return result.rows[0];
+  return result.rowCount;
 }
 
-export { checkCategory, insertPost, checkTags, insertPostTag, deletePostByID };
+/*
+ * Update post by id.
+ */
+async function updatePost(id, title, content, category, tags) {
+  const existingCatID = await checkCategory(category);
+
+  const result = await pool.query(
+    "UPDATE posts SET title=$1, content=$2, category_id=$3 WHERE post_id=$4",
+    [title, content, existingCatID, id],
+  );
+
+  await deletePostTag(id);
+
+  for (const tag of tags) {
+    const resultTagID = await checkTags(tag);
+    await insertPostTag(id, resultTagID);
+  }
+}
+
+export {
+  checkCategory,
+  insertPost,
+  checkTags,
+  insertPostTag,
+  deletePostByID,
+  updatePost,
+};

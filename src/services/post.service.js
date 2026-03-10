@@ -5,6 +5,7 @@ import {
   checkTags,
   insertPostTag,
   deletePostByID,
+  updatePost,
 } from "../db/index.js";
 
 async function addPostService(title, content, category, tags) {
@@ -26,44 +27,50 @@ async function removePostService(id) {
   return result;
 }
 
+async function updatePostService(id, title, content, category, tags) {
+  const result = await updatePost(id, title, content, category, tags);
+
+  return result;
+}
+
 /*-- Writes into local file --*/
 
-async function addPost(title, content, category, tags) {
-  let db = await getData();
-  const currId = await generateID(db);
-  const newPost = createPost(currId, title, content, category, tags);
-  await writeFile(db, newPost);
+// async function addPost(title, content, category, tags) {
+//   let db = await getData();
+//   const currId = await generateID(db);
+//   const newPost = createPost(currId, title, content, category, tags);
+//   await writeFile(db, newPost);
 
-  return result;
-}
+//   return result;
+// }
 
-async function getPost() {
-  let db = await getData();
-  return db;
-}
+// async function getPost() {
+//   let db = await getData();
+//   return db;
+// }
 
-async function getPostById(id) {
-  let db = await getData();
-  const result = await searchDB(db, id);
-  return result;
-}
+// async function getPostById(id) {
+//   let db = await getData();
+//   const result = await searchDB(db, id);
+//   return result;
+// }
 
-async function updatePost(id, title, content, category, tags) {
-  let db = await getData();
-  const newPost = createPost(id, title, content, category, tags);
+// async function updatePost(id, title, content, category, tags) {
+//   let db = await getData();
+//   const newPost = createPost(id, title, content, category, tags);
 
-  return await replaceItem(db, id, newPost);
-}
+//   return await replaceItem(db, id, newPost);
+// }
 
-async function deletePost(id) {
-  let db = await getData();
-  return await deleteItem(db, id);
-}
+// async function deletePost(id) {
+//   let db = await getData();
+//   return await deleteItem(db, id);
+// }
 
-async function getPostsContainingTerm(term) {
-  let db = await getData();
+// async function getPostsContainingTerm(term) {
+//   let db = await getData();
 
-  return await getPostsByTerm(db, term);
-}
+//   return await getPostsByTerm(db, term);
+// }
 
-export { addPostService, removePostService };
+export { addPostService, removePostService, updatePostService };
