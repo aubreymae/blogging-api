@@ -6,6 +6,7 @@ import {
   insertPostTag,
   deletePostByID,
   updatePost,
+  getPost,
 } from "../db/index.js";
 
 async function addPostService(title, content, category, tags) {
@@ -29,6 +30,12 @@ async function removePostService(id) {
 
 async function updatePostService(id, title, content, category, tags) {
   const result = await updatePost(id, title, content, category, tags);
+
+  return result;
+}
+
+async function getPostService(id) {
+  const result = await getPost(id);
 
   return result;
 }
@@ -73,4 +80,4 @@ async function updatePostService(id, title, content, category, tags) {
 //   return await getPostsByTerm(db, term);
 // }
 
-export { addPostService, removePostService, updatePostService };
+export { addPostService, removePostService, updatePostService, getPostService };

@@ -2,6 +2,7 @@ import {
   addPostService,
   removePostService,
   updatePostService,
+  getPostService,
 } from "../services/post.service.js";
 
 async function createPostHandler(req, res) {
@@ -46,7 +47,7 @@ async function getPostHandler(req, res) {
 async function getPostByIdHandler(req, res) {
   try {
     const id = parseInt(req.params.id);
-    const post = await getPostById(id);
+    const post = await getPostService(id);
     return res.status(200).json(post);
   } catch (error) {
     res.status(500).json({
@@ -103,4 +104,9 @@ async function updatePostHandler(req, res) {
   }
 }
 
-export { createPostHandler, deletePostHandler, updatePostHandler };
+export {
+  createPostHandler,
+  deletePostHandler,
+  updatePostHandler,
+  getPostByIdHandler,
+};

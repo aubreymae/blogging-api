@@ -90,6 +90,15 @@ async function updatePost(id, title, content, category, tags) {
   }
 }
 
+/*
+ * Get post by id.
+ */
+async function getPost(id) {
+  const result = await pool.query("SELECT * FROM posts WHERE post_id=$1", [id]);
+
+  return result.rows[0];
+}
+
 export {
   checkCategory,
   insertPost,
@@ -97,4 +106,5 @@ export {
   insertPostTag,
   deletePostByID,
   updatePost,
+  getPost,
 };
