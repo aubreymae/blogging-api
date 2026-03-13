@@ -3,6 +3,8 @@ import {
   removePostService,
   updatePostService,
   getPostService,
+  getAllPostsService,
+  getPostsByTermService,
 } from "../services/post.service.js";
 
 async function createPostHandler(req, res) {
@@ -25,7 +27,7 @@ async function getPostHandler(req, res) {
   if (req.query.term) {
     try {
       // find and return posts containing the term
-      const posts = await getPostsContainingTerm(req.query.term);
+      const posts = await getPostsByTermService(req.query.term);
       return res.status(200).json(posts);
     } catch (error) {
       res.status(500).json({
@@ -34,7 +36,7 @@ async function getPostHandler(req, res) {
     }
   } else {
     try {
-      const posts = await getPost();
+      const posts = await getAllPostsService();
       return res.status(200).json(posts);
     } catch (error) {
       res.status(500).json({
@@ -109,4 +111,5 @@ export {
   deletePostHandler,
   updatePostHandler,
   getPostByIdHandler,
+  getPostHandler,
 };

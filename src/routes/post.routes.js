@@ -4,12 +4,13 @@ import {
   deletePostHandler,
   updatePostHandler,
   getPostByIdHandler,
+  getPostHandler,
 } from "../controllers/post.controller.js";
 
 const router = express.Router();
 
 router.post("/", createPostHandler);
-// router.get("/", getPostHandler);
+router.get("/", getPostHandler);
 router.get("/:id", getPostByIdHandler);
 router.put("/:id", updatePostHandler);
 router.delete("/:id", deletePostHandler);

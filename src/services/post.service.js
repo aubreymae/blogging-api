@@ -7,6 +7,8 @@ import {
   deletePostByID,
   updatePost,
   getPost,
+  getAllPosts,
+  getPostsByTerm,
 } from "../db/index.js";
 
 async function addPostService(title, content, category, tags) {
@@ -36,6 +38,18 @@ async function updatePostService(id, title, content, category, tags) {
 
 async function getPostService(id) {
   const result = await getPost(id);
+
+  return result;
+}
+
+async function getAllPostsService() {
+  const result = await getAllPosts();
+
+  return result;
+}
+
+async function getPostsByTermService(term) {
+  const result = await getPostsByTerm(term);
 
   return result;
 }
@@ -80,4 +94,11 @@ async function getPostService(id) {
 //   return await getPostsByTerm(db, term);
 // }
 
-export { addPostService, removePostService, updatePostService, getPostService };
+export {
+  addPostService,
+  removePostService,
+  updatePostService,
+  getPostService,
+  getAllPostsService,
+  getPostsByTermService,
+};

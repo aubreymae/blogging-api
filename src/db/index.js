@@ -99,6 +99,28 @@ async function getPost(id) {
   return result.rows[0];
 }
 
+/*
+ * Get all posts.
+ */
+async function getAllPosts() {
+  const result = await pool.query("SELECT * FROM posts");
+
+  return result.rows;
+}
+
+/*
+ * Get posts by search term.
+ */
+async function getPostsByTerm(term) {
+  const search = `%${term}%`;
+  const result = await pool.query(
+    "SELECT posts.* FROM posts JOIN categories ON posts.category_id = categories.category_id WHERE posts.title ILIKE $1 OR posts.content ILIKE $1 OR categories.category_name ILIKE $1",
+    [search],
+  );
+
+  return result.rows;
+}
+
 export {
   checkCategory,
   insertPost,
@@ -107,4 +129,6 @@ export {
   deletePostByID,
   updatePost,
   getPost,
+  getAllPosts,
+  getPostsByTerm,
 };
